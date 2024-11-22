@@ -70,6 +70,8 @@ int main() {
 
     lcd_print("Scan RFID Card");
     sleep_ms(2000);
+     lcd_send_byte(LCD_CLEAR, true); // Clear LCD screen
+    sleep_ms(1000);
     // Check if a card is present
     if (card_present(mfrc)) {
         if (read_card_uid(mfrc, uid, &uid_length)) {
