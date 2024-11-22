@@ -1,0 +1,48 @@
+cmake_minimum_required(VERSION 3.13...3.27)
+
+# Initialize the Raspberry Pi Pico SDK
+include(pico_sdk_import.cmake)
+project(MS3)  # Change the project name to MS3
+
+# Initialize the Raspberry Pi Pico SDK
+pico_sdk_init()
+
+# Define the executable and include the main source file
+add_executable(MS3  # Change the executable name to MS3
+    main.c
+    drivers/buzzerDriver/buzzer.c
+    drivers/servoDriver/servo.c
+    drivers/irDriver/ir_sensor.c
+    drivers/lcdDriver/lcd.c
+    drivers/ultrasonicDriver/ultrasonic.c
+    drivers/rfidDriver/rfid.c
+)
+
+# Include directories for drivers and any additional headers
+target_include_directories(MS3 PRIVATE  # Update target to MS3
+    drivers/buzzerDriver
+    drivers/servoDriver
+    drivers/irDriver
+    drivers/lcdDriver
+    drivers/ultrasonicDriver
+    drivers/rfidDriver
+    include/hardware
+    ${CMAKE_CURRENT_SOURCE_DIR} # Include the directory containing pwm.h (same as main.c)
+)
+
+# Link necessary libraries
+target_link_libraries(MS3  # Update target to MS3
+    pico_stdlib        # Standard Pico library
+    hardware_pwm       # PWM hardware support
+    hardware_adc       # ADC hardware support
+    hardware_gpio      # GPIO hardware support
+    hardware_timer     # Timer support
+    hardware_spi       # SPI hardware support
+)
+
+# Enable additional output formats (UF2, bin, etc.)
+pico_add_extra_outputs(MS3)  # Update target to MS3
+
+# Enable USB if needed (optional, for debugging or communication purposes)
+pico_enable_stdio_usb(MS3 1)  # Update target to MS3
+pico_enable_stdio_uart(MS3 0)  # Update target to MS3
