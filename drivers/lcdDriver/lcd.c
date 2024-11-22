@@ -10,6 +10,10 @@
 #define D6 18
 #define D7 19
 
+// Define LCD Commands
+#define LCD_LINE_1 0x80 // Move cursor to the first line
+#define LCD_LINE_2 0xC0 // Move cursor to the second line
+
 // Helper function to generate enable pulse
 void lcd_pulse_enable() {
     gpio_put(E, 1);
@@ -69,8 +73,16 @@ void lcd_init() {
     sleep_ms(20);
 }
 
-// Print a string to the LCD
+// Print a string to the LCD (current cursor position)
 void lcd_print(const char *str) {
+    while (*str) {
+        lcd_send_byte(*str++, false);
+    }
+}
+
+// Print a string to the LCD on the second line
+void lcd_print2(const char *str) {
+    lcd_send_byte(LCD_LINE_2, true); // Move cursor to the second line
     while (*str) {
         lcd_send_byte(*str++, false);
     }
