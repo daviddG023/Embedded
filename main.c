@@ -136,7 +136,7 @@ int main() {
         sprintf(us_message, "No Obj Detected");
         printf("Ultrasonic: Timeout! No object detected.\n");
     } else {
-        sprintf(us_message, "Distance: %.2f cm", distance);
+        sprintf(us_message, "Distance: %.2fcm", distance);
         printf("Ultrasonic: %.2f cm\n", distance);
     }
     lcd_print2(us_message);
