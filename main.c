@@ -68,6 +68,8 @@ int main() {
     lcd_send_byte(LCD_CLEAR, true); // Clear LCD screen
     sleep_ms(1000);
 
+    lcd_print("Scan RFID Card");
+    sleep_ms(2000);
     // Check if a card is present
     if (card_present(mfrc)) {
         if (read_card_uid(mfrc, uid, &uid_length)) {
@@ -136,7 +138,7 @@ int main() {
         sprintf(us_message, "No Obj Detected");
         printf("Ultrasonic: Timeout! No object detected.\n");
     } else {
-        sprintf(us_message, "Distance: %.2fcm", distance);
+        sprintf(us_message, "Dist: %.2fcm", distance);
         printf("Ultrasonic: %.2f cm\n", distance);
     }
     lcd_print2(us_message);
