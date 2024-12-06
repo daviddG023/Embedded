@@ -10,6 +10,7 @@
 #define configMINIMAL_STACK_SIZE                128
 #define configTOTAL_HEAP_SIZE                   (32 * 1024)  // 32 KB heap
 #define configMAX_TASK_NAME_LEN                 16
+#define configENABLE_MPU 0
 
 #define configUSE_16_BIT_TICKS                  0
 #define configIDLE_SHOULD_YIELD                 1
