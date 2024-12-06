@@ -19,13 +19,18 @@ add_executable(MS3  # Change the executable name to MS3
     drivers/rfidDriver/mfrc522.c
     freertos/tasks.c
     freertos/queue.c
+    freertos/list.c        # Add missing list.c required by FreeRTOS
+    freertos/timers.c      # Add missing timers.c if you're using timers
     freertos/portable/GCC/ARM_CM0/port.c
     freertos/portable/MemMang/heap_4.c
+    freertos/portable/GCC/ARM_CM0/portasm.c  # Include portasm.c here
+
 )
 
 # Include directories for drivers and any additional headers
 target_include_directories(MS3 PRIVATE
     freertos/include
+    freertos/portable/MemMang
     freertos/portable/GCC/ARM_CM0
     drivers/
     drivers/buzzerDriver

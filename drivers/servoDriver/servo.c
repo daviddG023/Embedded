@@ -55,3 +55,23 @@ void rotate_servo(uint slice_num) {
         }
     }
 }
+
+// Function to open the servo from 90° to 0°
+void open_servo(uint slice_num) {
+    // Gradually decrease angle from 90° to 0°
+    for (int angle = 90; angle >= 0; angle -= 5) {
+        set_servo_angle(slice_num, angle);
+        sleep_ms(50); // Wait for the servo to reach the position
+    }
+    printf("Servo opened from 90° to 0°.\n");
+}
+
+// Function to close the servo from 0° to 90°
+void close_servo(uint slice_num) {
+    // Gradually increase angle from 0° to 90°
+    for (int angle = 0; angle <= 90; angle += 5) {
+        set_servo_angle(slice_num, angle);
+        sleep_ms(50); // Wait for the servo to reach the position
+    }
+    printf("Servo closed from 0° to 90°.\n");
+}
