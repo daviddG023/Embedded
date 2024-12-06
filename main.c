@@ -83,26 +83,17 @@ int main() {
             }
             lcd_print(uid_str); // Print the UID on the LCD
             sleep_ms(1000);
-            // // **3. Rotate Servo Motor**
-            printf("Rotating Servo...\n");
-            uint slice_num = pwm_gpio_to_slice_num(SERVO_PIN);
-            rotate_servo(slice_num);
-
-            // **5. Simple Buzzer ON/OFF**
-            printf("Playing 1kHz tone for 500ms\n");
-            buzzer_play_tone(BUZZER_PIN, 1000, 500); // 1kHz tone for 500ms
-            sleep_ms(500);                           // Wait for 500ms
-
-            // Play a 500Hz tone for 1 second
-            printf("Playing 500Hz tone for 1 second\n");
-            buzzer_play_tone(BUZZER_PIN, 500, 1000); // 500Hz tone for 1 second
-            sleep_ms(500);                           // Wait for 500ms
-
-            // Play a 2kHz tone for 250ms
-            printf("Playing 2kHz tone for 250ms\n");
-            buzzer_play_tone(BUZZER_PIN, 2000, 250); // 2kHz tone for 250ms
-
-            sleep_ms(5000);
+            if (uid_length == 4 && uid[0] == 0x07 && uid[1] == 0x20 && uid[2] == 0xD1 && uid[3] == 0x26) {
+                // Matched UID - Play accessible sound
+                printf("Access Granted. Playing success tone...\n");
+                buzzer_play_tone(BUZZER_PIN, 1000, 500); // 1kHz tone for 500ms
+                rotate_servo(pwm_gpio_to_slice_num(SERVO_PIN)); // Rotate the servo
+            } else {
+                // Unmatched UID - Play non-accessible sound
+                printf("Access Denied. Playing error tone...\n");
+                buzzer_play_tone(BUZZER_PIN, 500, 1000); // 500Hz tone for 1 second
+            }
+           sleep_ms(5000);
 
         }
     } else {
