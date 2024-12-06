@@ -86,7 +86,7 @@ int main() {
             if (uid_length == 4 && uid[0] == 0x07 && uid[1] == 0x20 && uid[2] == 0xD1 && uid[3] == 0x26) {
                 // Matched UID - Play accessible sound
                 printf("Access Granted. Playing success tone...\n");
-                buzzer_play_tone(BUZZER_PIN, 1000, 500); // 1kHz tone for 500ms
+                buzzer_play_tone(BUZZER_PIN, 1000, 1500); // 1kHz tone for 500ms
                 rotate_servo(pwm_gpio_to_slice_num(SERVO_PIN)); // Rotate the servo
             } else {
                 // Unmatched UID - Play non-accessible sound
