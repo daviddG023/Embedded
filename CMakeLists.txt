@@ -17,10 +17,17 @@ add_executable(MS3  # Change the executable name to MS3
     drivers/ultrasonicDriver/ultrasonic.c
     drivers/rfidDriver/rfid.c
     drivers/rfidDriver/mfrc522.c
+    freertos/tasks.c
+    freertos/queue.c
+    freertos/portable/GCC/ARM_CM0/port.c
+    freertos/portable/MemMang/heap_4.c
 )
 
 # Include directories for drivers and any additional headers
 target_include_directories(MS3 PRIVATE
+    freertos/include
+    freertos/portable/GCC/ARM_CM0
+    drivers/
     drivers/buzzerDriver
     drivers/servoDriver
     drivers/irDriver
